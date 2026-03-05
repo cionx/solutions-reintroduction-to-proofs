@@ -1,0 +1,1 @@
+exact Sum.inr b
