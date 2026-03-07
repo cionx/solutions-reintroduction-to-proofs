@@ -1,0 +1,1 @@
+exact Empty.elim
