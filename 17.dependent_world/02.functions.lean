@@ -1,0 +1,2 @@
+intro A
+exact id
