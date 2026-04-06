@@ -1,5 +1,5 @@
-intro φ
-intro α
-apply φ
-intro ω
-exact ω α
+intro φ4
+intro φ1
+apply φ4
+intro φ2
+exact φ2 φ1

@@ -1,11 +1,9 @@
--- Solution 1:
+-- Solution 1.
 intro a
 exact g (f a)
 
-/- Solution 2:
+-- Solution 2.
 exact fun a ↦ g (f a)
--/
 
-/- Solution 3:
+-- Solution 3.
 exact g ∘ f
--/
