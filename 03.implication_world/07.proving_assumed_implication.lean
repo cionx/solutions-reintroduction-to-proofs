@@ -1,7 +1,6 @@
--- Solution 1:
+-- Solution 1.
 exact h
 
-/- Solution 2:
+-- Solution 2.
 intro p
 exact h p
--/
