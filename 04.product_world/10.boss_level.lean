@@ -36,8 +36,8 @@ A     M     C   E
 
 intro α β γ δ
 intro ⟨a, b, c, d, e⟩
-let m := α ⟨b, d⟩
-let x := γ a m
-let ⟨y, n⟩ := β e
-let z := δ c n
+have m := α ⟨b, d⟩
+have x := γ a m
+have ⟨y, n⟩ := β e
+have z := δ c n
 exact ⟨x, y, z⟩
