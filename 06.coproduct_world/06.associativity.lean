@@ -1,4 +1,19 @@
--- Solution 1:
+-- Solution 1.
+/-
+ - This solution doesn’t work because Sum.lift isn’t available,
+ - even though it should be.
+ -/
+exact ⟨
+  Sum.lift
+    (Sum.lift Sum.inl (Sum.inr ∘ Sum.inl))
+    (Sum.inr ∘ Sum.inr),
+  Sum.lift
+    (Sum.inl ∘ Sum.inl)
+    (Sum.lift (Sum.inr ∘ Sum.inl) Sum.inr)
+⟩
+-/
+
+-- Solution 2.
 constructor
 · intro x
   rcases x with (a | b) | c
@@ -10,16 +25,3 @@ constructor
   · exact Sum.inl (Sum.inl a)
   · exact Sum.inl (Sum.inr b)
   · exact Sum.inr c
-
-/- Solution 2:
- - This solution doesn’t currenty work because Sum.lift isn’t available,
- - even though it should be.
-exact ⟨
-  Sum.lift
-    (Sum.lift Sum.inl (Sum.inr ∘ Sum.inl))
-    (Sum.inr ∘ Sum.inr),
-  Sum.lift
-    (Sum.inl ∘ Sum.inl)
-    (Sum.lift (Sum.inr ∘ Sum.inl) Sum.inr)
-⟩
--/

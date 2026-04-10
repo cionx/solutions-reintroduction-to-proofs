@@ -1,10 +1,8 @@
-/- Solution 1:
- - This solution currently doesn’t work since Sum.lift isn’t available,
- - even though it should be.
+-- Solution 1.
+have Sum.lift := Sum.elim
 exact Sum.lift Sum.inr Sum.inl
--/
 
--- Solution 2:
+-- Solution 2.
 intro x
 rcases x with a | b
 · exact Sum.inr a
