@@ -1,1 +1,1 @@
-exact Function.swap Function.comp
+exact flip Function.comp
