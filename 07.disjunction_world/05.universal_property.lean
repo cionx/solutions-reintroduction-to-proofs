@@ -1,8 +1,8 @@
 constructor
-· intro pq_r
-  exact ⟨pq_r ∘ Or.inl, pq_r ∘ Or.inr⟩
-· intro ⟨p_r, q_r⟩
+· intro h
+  exact ⟨h ∘ Or.inl, h ∘ Or.inr⟩
+· intro ⟨h1, h2⟩
   intro pq
   rcases pq with p | q
-  · exact p_r p
-  · exact q_r q
+  · exact h1 p
+  · exact h2 q
