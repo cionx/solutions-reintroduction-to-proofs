@@ -1,5 +1,5 @@
-let eval {P Q : Prop} (p : P) (h : P → Q) := h p
+have modus_ponens {P Q : Prop} : P → (P → Q) → Q := flip id
 
-let double_neg {P : Prop} : P → ¬ ¬ P := eval
+have double_neg {P : Prop} : P → ¬ ¬ P := modus_ponens
 
 exact And.uncurry double_neg

@@ -1,3 +1,3 @@
-let yoneda {P Q R : Prop} (h : P → Q) : (Q → R) → (P → R) := fun k ↦ k ∘ h
+have syllogism {P Q R : Prop} : (P → Q) → (Q → R) → (P → R) := flip Function.comp
 
-exact yoneda
+exact syllogism

@@ -1,3 +1,3 @@
-let eval {P Q : Prop} (p : P) (h : P → Q) : Q := h p
+have modus_ponens {P Q : Prop} : P → (P → Q) → Q := flip id
 
-exact eval
+exact modus_ponens

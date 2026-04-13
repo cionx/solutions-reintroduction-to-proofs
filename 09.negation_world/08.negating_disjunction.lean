@@ -1,15 +1,15 @@
-let And.lift {P Q R : Prop} (pq : P → Q) (pr : P → R) : P → Q ∧ R := fun p ↦ ⟨pq p, pr p⟩
+have syllogism {P Q R : Prop} : (P → Q) → (Q → R) → (P → R) := flip Function.comp
 
-let Or.lift {P Q R : Prop} (pr : P → R) (qr : Q → R) : P ∨ Q → R := by
-  intro pq
+have And.lift {P Q R : Prop} : (P → Q) → (P → R) → (P → Q ∧ R) :=
+  fun h1 h2 ↦ (fun p ↦ ⟨h1 p, h2 p⟩)
+
+have Or.lift {P Q R : Prop} : (P → R) → (Q → R) → P ∨ Q → R := by
+  intro h1 h2 pq
   rcases pq with p | q
-  · exact pr p
-  · exact qr q
+  · exact h1 p
+  · exact h2 q
 
-let swap_comp {P Q R : Prop} : (P → Q) → (Q → R) → (P → R) := fun h1 h2 ↦ h2 ∘ h1
+have Or.components {P Q R : Prop} : (P ∨ Q → R) → (P → R) ∧ (Q → R) :=
+  And.lift (syllogism Or.inl) (syllogism Or.inr)
 
-let contrapos {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) := swap_comp
-
-constructor
-· exand And.lift (contrapos Or.inl) (contrapos Or.inr)
-· exact And.uncurry Or.lift
+exact ⟨Or.components, And.uncurry Or.lift⟩

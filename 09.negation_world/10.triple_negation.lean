@@ -1,7 +1,9 @@
-let eval {P Q : Prop} (p : P) (h : P → Q) : Q := h p
+have modus_ponens {P Q : Prop} : P → (P → Q) → Q := flip id
 
-let imp_double_neg {P : Prop} : P → ¬ ¬ P := eval
+have imp_double_neg {P : Prop} : P → ¬ ¬ P := modus_ponens
 
-let contra_pos {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) := fun pq nq ↦ nq ∘ pq
+have syllogism {P Q R : Prop} : (P → Q) → (Q → R) → (P → R) := flip Function.comp
 
-exact ⟨imp_double_neg, contra_pos imp_double_neg⟩
+have modus_tollens {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) := syllogism
+
+exact ⟨imp_double_neg, modus_tollens imp_double_neg⟩
