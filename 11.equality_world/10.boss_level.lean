@@ -1,9 +1,8 @@
-let h1 (a : A) (b : B) : (h ∘ f) ⟨a, b⟩ = h (f ⟨a, b⟩) := rfl
-let h2 (a : A) (b : B) : (k ∘ g) ⟨a, b⟩ = k (g ⟨a, b⟩) := rfl
+have comp_unfold {X Y Z : Type} (g : Y → Z) (f : X → Y) (x : X)
+: (g ∘ f) x = g (f x) :=
+  rfl
 
-rw[← h1]
-rw[← h2]
+rw[← comp_unfold h f, ← comp_unfold k g]
 rw[r]
-rw[p]
-rw[q]
+rw[p, q]
 rfl
