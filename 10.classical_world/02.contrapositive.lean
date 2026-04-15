@@ -1,10 +1,10 @@
-let yoneda {P Q R : Prop} : (P → Q) → (Q → R) → (P → R) := fun h1 h2 ↦ h2 ∘ h1
+have syllogism {P Q R : Prop} : (P → Q) → (Q → R) → (P → R) := flip Function.comp
 
-let contrapos {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) := yoneda
+have modus_tollens {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) := syllogism
 
-let eval {P Q : Prop} : P → (P → Q) → Q := flip id
+have modus_ponens {P Q : Prop} : P → (P → Q) → Q := flip id
 
-let imp_double_neg {P : Prop} : P → ¬ ¬ P := eval
+have imp_double_neg {P : Prop} : P → ¬ ¬ P := modus_ponens
 
 intro h
-exact byContradiction ∘ (contrapos h) ∘ imp_double_neg
+exact byContradiction ∘ (modus_tollens h) ∘ imp_double_neg

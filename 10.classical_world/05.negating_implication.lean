@@ -1,19 +1,24 @@
-let And.lift {P Q R : Prop} : (P → Q) → (P → R) → (P → Q ∧ R) := by
-  intro pq pr
-  exact fun p ↦ ⟨pq p, pr p⟩
+have And.lift {P Q R : Prop} : (P → Q) → (P → R) → (P → Q ∧ R) := by
+  intro h1 h2
+  exact fun p ↦ ⟨h1 p, h2 p⟩
 
-let contrapos {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) := flip Function.comp
+have modus_tollens {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) :=
+  flip Function.comp
 
-let const_imp {P Q : Prop} (q : Q) : P → Q := fun _ ↦ q
+have const {P Q : Prop} : Q → (P → Q) := by
+  intro q
+  exact fun _ ↦ q
 
-let absurd {P Q : Prop} (p : P) (np : ¬ P) : Q := False.elim (np p)
+have absurd {P Q : Prop} : P → (¬ P) → Q := by
+  intro p np
+  exact False.elim (np p)
 
-let technical {P Q : Prop} : (P → ¬ ¬ Q) → (P → Q) := Function.comp byContradiction
+have technical {P Q : Prop} : (P → ¬ ¬ Q) → (P → Q) :=
+  Function.comp byContradiction
 
-apply And.uncurry And.lift
-constructor
+apply And.lift
 · apply technical
-  apply contrapos
+  apply modus_tollens
   exact flip absurd
-· apply contrapos
-  exact const_imp
+· apply modus_tollens
+  exact const

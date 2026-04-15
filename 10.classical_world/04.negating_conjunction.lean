@@ -1,34 +1,28 @@
-let eval {P Q : Prop} : P → (P → Q) → Q := flip id
+have modus_ponens {P Q : Prop} : P → (P → Q) → Q :=
+  flip id
 
-let imp_double_neg {P : Prop} : P → ¬ ¬ P := eval
+have imp_double_neg {P : Prop} : P → ¬ ¬ P :=
+  modus_ponens
 
-let yoneda_co {P Q R : Prop} : (Q → R) → ((P → Q) → (P → R)) :=
-  Function.comp
-
-let yoneda_contra {P Q R : Prop} : (P → Q) → ((Q → R) → (P → R)) :=
+have syllogism {P Q R : Prop} : (P → Q) → ((Q → R) → (P → R)) :=
   flip Function.comp
 
-let contrapos {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) :=
-  yoneda_contra
+have modus_tollens {P Q : Prop} : (P → Q) → (¬ Q → ¬ P) :=
+  syllogism
 
-let technical {P Q : Prop} : (P → ¬ ¬ Q) → (P → Q) :=
-  yoneda_co byContradiction
+have technical {P Q : Prop} : (P → ¬ ¬ Q) → (P → Q) :=
+  Function.comp byContradiction
 
-let or_imp' {P Q R : Prop} : ((P ∨ Q) → R) ↔ (P → R) ∧ (Q → R) := by
-  constructor
-  · exact fun h ↦ ⟨h ∘ Or.inl, h ∘ Or.inr⟩
-  · intro ⟨pr, qr⟩
-    intro p_q
-    rcases p_q with p | q
-    · exact pr p
-    · exact qr q
+have Or.components {P Q R : Prop} : ((P ∨ Q) → R) → (P → R) ∧ (Q → R) :=
+  fun h ↦ ⟨h ∘ Or.inl, h ∘ Or.inr⟩
 
-let or_neg {P Q : Prop} : ¬ (P ∨ Q) ↔ (¬ P) ∧ (¬ Q) := or_imp'
+have Or.negation {P Q : Prop} : ¬ (P ∨ Q) → (¬ P) ∧ (¬ Q) :=
+  Or.components
 
-let and_imp' {P Q R S : Prop} : (P → R) → (Q → S) → (P ∧ Q → R ∧ S) := by
-  intro pr qs
-  exact fun ⟨p, q⟩ ↦ ⟨pr p, qs q⟩
+have And.imp_imp {P Q T U : Prop} : (P → T) → (Q → U) → (P ∧ Q → T ∧ U) := by
+  intro h1 h2
+  exact fun ⟨p, q⟩ ↦ ⟨h1 p, h2 q⟩
 
 apply technical
-apply contrapos
-exact (and_imp' byContradiction byContradiction) ∘ or_neg.1
+apply modus_tollens
+exact (And.imp_imp byContradiction byContradiction) ∘ Or.negation

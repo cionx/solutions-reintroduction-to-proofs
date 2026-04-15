@@ -1,7 +1,10 @@
-let not_or' {P Q : Prop} : ¬ (P ∨ Q) → (¬ P) ∧ (¬ Q) :=
+have Or.components {P Q T : Prop} : (P ∨ Q → T) → (P → T) ∧ (Q → T) :=
   fun h ↦ ⟨h ∘ Or.inl, h ∘ Or.inr⟩
 
-let eval {P Q : Prop} : P → (P → Q) → Q := flip id
+have Or.negation {P Q : Prop} : ¬ (P ∨ Q) → (¬ P) ∧ (¬ Q) :=
+  Or.components
+
+have modus_ponens {P Q : Prop} : P → (P → Q) → Q := flip id
 
 apply byContradiction
-exact (And.uncurry eval) ∘ not_or'
+exact (And.uncurry modus_ponens) ∘ Or.negation
