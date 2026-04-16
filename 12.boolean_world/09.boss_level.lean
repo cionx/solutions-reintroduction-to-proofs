@@ -5,7 +5,7 @@
  - need r to be false.
  -/
 
-exact true
-exact true
-exact false
+exact true  -- p
+exact true  -- q
+exact false -- r
 rfl
