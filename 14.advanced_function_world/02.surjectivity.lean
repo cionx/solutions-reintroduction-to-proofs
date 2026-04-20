@@ -1,5 +1,5 @@
-intro x
-cases x
+intro b
+cases b
 · use true
   rfl
 · use false

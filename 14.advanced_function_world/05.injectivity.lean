@@ -1,6 +1,6 @@
-have not_involutive : ∀ (x : Bool), not (not x) = x := by
-  intro x
-  cases x
+have not_involutive : ∀ (b : Bool), not (not b) = b := by
+  intro b
+  cases b
     <;> rfl
 
 intro x y hxy

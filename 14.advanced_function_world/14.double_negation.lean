@@ -1,3 +1,3 @@
-ext
-cases x
+ext b
+cases b
   <;> rfl

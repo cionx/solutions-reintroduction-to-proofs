@@ -7,7 +7,6 @@ have hg : ∀ (b : B), f (g b) = b := by
   exact (surj b).choose_spec
 
 use g
-
 constructor
 · intro a
   apply inj

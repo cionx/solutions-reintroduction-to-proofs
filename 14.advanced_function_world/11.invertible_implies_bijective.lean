@@ -1,9 +1,11 @@
 rcases inv with ⟨g, hg⟩
 constructor
-· intro x y fx_eq_fy
-  rw [← hg.1 x, ← hg.1 y]
-  exact congrArg g fx_eq_fy
-· intro b
+· -- Injectivity.
+  intro a1 a2 fa1_eq_fa2
+  rw [← hg.1 a1, ← hg.1 a2]
+  exact congrArg g fa1_eq_fa2
+· -- Surjectivity
+  intro b
   use g b
   rw [hg.2]
   rfl

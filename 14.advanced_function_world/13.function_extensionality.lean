@@ -1,2 +1,2 @@
-ext
-exact p x
+ext a
+exact p a

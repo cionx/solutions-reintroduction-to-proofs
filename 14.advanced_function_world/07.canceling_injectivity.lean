@@ -1,3 +1,3 @@
-intro x y fx_eq_fy
+intro a1 a2 fa1_eq_fa2
 apply gf_is_inj
-exact congrArg g fx_eq_fy
+exact congrArg g fa1_eq_fa2
