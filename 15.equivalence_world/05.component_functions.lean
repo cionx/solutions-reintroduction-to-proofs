@@ -1,9 +1,8 @@
 constructor
-· exact fun f ↦ ⟨Prod.fst ∘ f, Prod.snd ∘ f⟩
-· exact fun ⟨f1, f2⟩ ↦ (fun x ↦ ⟨f1 x, f2 x⟩)
+· exact Prod.components
+· exact Prod.lift
 · intro f
   ext x
-  · rfl
-  · rfl
+    <;> rfl
 · intro ⟨f1, f2⟩
   rfl
