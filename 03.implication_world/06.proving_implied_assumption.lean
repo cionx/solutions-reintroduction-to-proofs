@@ -1,3 +1,11 @@
+/-
+example {P Q : Prop} (p : P) : Q → P := by
+-/
+
+
+
+/- We can use the same approaches as for constant functions. -/
+
 -- Solution 1.
 intro q
 exact p
