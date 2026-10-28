@@ -1,3 +1,11 @@
+/-
+theorem And.uncurry {P Q R : Prop} (h : P → Q → R) : P ∧ Q → R := by
+-/
+
+
+
+/- We do the same as for uncurrying of functions. -/
+
 -- Solution 1.
 exact fun ⟨p, q⟩ ↦ h p q
 
